@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         deletePhotoButton.setOnClickListener{
             val db = dbHelper.writableDatabase
             db.delete(PhotoTable.TABLE_NAME,"_ID = $photoId",null) //レコード削除
+            db.close()
 
             imageView.setImageResource(R.drawable.art)
 
@@ -64,6 +65,7 @@ class MainActivity : AppCompatActivity() {
             val values = getContentValues(getBinaryFromBitmap(bitmap))
             val db = dbHelper.writableDatabase
             photoId = db.insert(PhotoTable.TABLE_NAME, null, values) //レコード追加
+            db.close()
 
             Toast.makeText(this,"登録しました",Toast.LENGTH_LONG).show()
         }
